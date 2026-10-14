@@ -44,7 +44,7 @@ const nf=(x,max=1)=>new Intl.NumberFormat(lang==="he"?"he-IL":"en-US",{maximumFr
 function sizeText(m){const u=T[lang].u;
  if(m<1e-3)return nf(m*1e6,0)+" "+u.um; if(m<0.02)return nf(m*1e3,1)+" "+u.mm;
  if(m<1)return nf(m*100,1)+" "+u.cm; return nf(m,1)+" "+u.m;}
-function ratioText(r){return r>=10?nf(Math.round(r),0):nf(Math.round(r*10)/10,1)}
+function ratioText(r){if(r>=100){const p=Math.pow(10,Math.floor(Math.log10(r))-1);return nf(Math.round(r/p)*p,0)}return r>=10?nf(Math.round(r),0):nf(Math.round(r*10)/10,1)}
 // static icons
 function icons(){
  const set=(id,k)=>$(id).insertAdjacentHTML("afterbegin",svg(k));
